@@ -1,17 +1,42 @@
+# require neccesary files
+require_relative "pokedex/pokemons"
 require_relative "player"
 require_relative "battle"
 require_relative "game"
 
 class Pokemon
+  attr_reader :char_pokemon , :indivudal_stats, :effort_values
   # include neccesary modules
 
   # (complete parameters)
-  def initialize
+  def initialize(specie, name, level)
+    #@char_pokemon = Pokedex::POKEMONS.select { |name, data| name == specie}.values
+    @char_pokemon = Pokedex::POKEMONS[specie.capitalize]
     # Retrieve pokemon info from Pokedex and set instance variables
+    @name = name || specie
+    @species = specie
+    @level = level || 1
+    @type = @char_pokemon[:type]
+    @base_exp = @char_pokemon[:base_exp]
+    @effort_points = @char_pokemon[:effort_points]
+    @growth_rate = @char_pokemon[:growth_rate]
+    @base_stats = @char_pokemon[:base_stats]
+    @moves = @char_pokemon[:moves]
+    @max_hp = @base_stats[:hp]
+    @hp = @max_hp
+    @attack = @base_stats[:attack]
+    @defense = @base_stats[:defense]
+    @special_attack = @base_stats[:special_attack]
+    @special_defense = @base_stats[:special_defense]
+    @speed = @base_stats[:speed]
     # Calculate Individual Values and store them in instance variable
+    @indivudal_stats = { hp: rand(0..31), attack: rand(0..31), defense: rand(0..31), special_attack: rand(0..31), special_defense: rand(0..31), speed: rand(0..31) }
     # Create instance variable with effort values. All set to 0
+    @effort_values = { hp: 0, attack: 0, defense: 0, special_attack: 0, special_defense: 0, speed: 0 }
+    @experience_got = 0
     # Store the level in instance variable
     # If level is 1, set experience points to 0 in instance variable.
+   
     # If level is not 1, calculate the minimum experience point for that level and store it in instance variable.
     # Calculate pokemon stats and store them in instance variable
   end
@@ -58,3 +83,10 @@ class Pokemon
   # private methods:
   # Create here auxiliary methods
 end
+
+
+# pokemon1 = Pokemon.new("Charmander", nil, 1)
+# #p pokemon1
+#  p pokemon1.effort_values
+
+
