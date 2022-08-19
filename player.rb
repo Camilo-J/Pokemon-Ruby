@@ -2,8 +2,8 @@
 
 class Player
   # (Complete parameters)
-  def initialize
-    # Complete this
+  def initialize(name)
+    @name = name
   end
 
   def select_move

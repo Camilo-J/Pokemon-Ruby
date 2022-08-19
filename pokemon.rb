@@ -1,4 +1,6 @@
-# require neccesary files
+require_relative "player"
+require_relative "battle"
+require_relative "game"
 
 class Pokemon
   # include neccesary modules
