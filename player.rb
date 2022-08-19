@@ -3,6 +3,7 @@ require_relative "pokemon"
 require_relative "pokedex/pokemons"
 class Player
   # (Complete parameters)
+
   def initialize(name, pokemon_species, name_pokemon = nil, level_pokemon = nil)
     # Complete this
     @name = name

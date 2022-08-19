@@ -1,5 +1,9 @@
 # require neccesary files
 require_relative "pokedex/pokemons"
+require_relative "player"
+require_relative "battle"
+require_relative "game"
+
 class Pokemon
   attr_reader :char_pokemon , :indivudal_stats, :effort_values
   # include neccesary modules
