@@ -1,3 +1,4 @@
+require_relative "player"
 class Battle
   # (complete parameters)
   def initialize
@@ -21,4 +22,5 @@ class Battle
     # Check which player won and print messages
     # If the winner is the Player increase pokemon stats
   end
+
 end
