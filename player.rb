@@ -1,6 +1,8 @@
 # require neccesary files
 require_relative "pokemon"
+require_relative "get_input"
 class Player
+  include GetInput
   attr_reader :pokemon
   # (Complete parameters)
 
@@ -13,6 +15,8 @@ class Player
 
   def select_move
     # Complete this
+    move = get_with_options("Select a move to attack: ", @pokemon.moves)
+    p @pokemon.current_move = Pokedex::MOVES[move.downcase]
   end
 end
 
@@ -30,4 +34,9 @@ class Leader < Player
     super("Gym Leader Brock", "Onix", "Onix", 10)
   end
 end
-# p playyer1 = Player.new("hola","charmander","Charmander")
+playyer1 = Player.new("hola","Pikachu","Pikachu")
+playyer2 = Player.new("nose","Onix","Onix")
+playyer1.select_move
+# playyer2.select_move
+# playyer1.pokemon.attack(playyer2)
+ playyer1.pokemon.attack(playyer2.pokemon)
