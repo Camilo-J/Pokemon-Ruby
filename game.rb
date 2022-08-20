@@ -66,40 +66,19 @@ pokemon_gotten = game.pokemon
 pokemon_name_gotten = game.pokemon_name
  playyer1 = Player.new(name_gotten,pokemon_gotten,pokemon_name_gotten)
 
-p playyer1.pokemon.stat
+
+#playyer1.pokemon.stat
 def print_menu
   puts "\n" + "-" * 30 + "Menu" + "-" * 30
   puts "1. Stats           2. Train          3. Leader"+"          4. Exit"
   puts "\n"
 
   print "> "
-  gets.chomp.strip.downcase
+  gets.chomp.strip
 end
-action = nil
-while action != "exit"
-  action = print_menu
-end  
+
+
     # Then create a Player with that information and store it in @player
-
-=begin
-    # Suggested game flow
-    action = menu
-    until action == "Exit"
-      case action
-      when "Train"
-        train
-        action = menu
-      when "Leader"
-        challenge_leader
-        action = menu
-      when "Stats"
-        show_stats
-        action = menu
-      end
-    end
-
-    goodbye
-  end
 
   def train
     # Complete this
@@ -109,8 +88,16 @@ end
     # Complete this
   end
 
-  def show_stats
+  def show_stats(jugador,pokemon_name_gotten)
     # Complete this
+   puts "#{pokemon_name_gotten}:"
+   puts "Kind: #{jugador.pokemon.species}"
+   puts "Level: #{jugador.pokemon.level}"
+   puts "Type: #{jugador.pokemon.type}"
+   puts "Stats:"
+     jugador.pokemon.stat.each do |stat, value|
+      puts "#{stat}: #{value}"
+      end
   end
 
   def goodbye
@@ -120,10 +107,22 @@ end
   def menu
     # Complete this
   end
+
+# Suggested game flow
+
+action = print_menu
+until action == "Exit"
+  case action
+  when "Train"
+    train
+    action = print_menu
+  when "Leader"
+    challenge_leader
+    action = print_menu
+  when "Stats"
+    show_stats(playyer1,pokemon_name_gotten)
+    action = print_menu
+  end
 end
 
-game = Game.new
-game.start
-
-#bot = Bot.new
-=end
+goodbye
