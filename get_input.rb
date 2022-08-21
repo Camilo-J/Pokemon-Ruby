@@ -26,5 +26,20 @@ module GetInput
       options.each.with_index do |option, index|
         puts "#{index + 1}. #{option.capitalize}"
       end
+
     end
+  end
+
+  def desicion(options,player, bot, mensaje = nil)
+    mensaje_got = mensaje || "training"
+  puts "#{player.name} challenge #{bot.name} for #{mensaje_got}"
+  puts "#{bot.name} has a #{bot.pokemon.name} level #{bot.pokemon.level}"
+  puts "What do you want to do now?"
+  input = ""
+  until options.include?(input.downcase)
+    print_options(options)
+    print "> "
+    input = gets.chomp
+  end
+  input
   end
