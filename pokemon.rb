@@ -5,8 +5,8 @@ require_relative "pokedex/moves"
 # require_relative "game"
 
 class Pokemon
-  attr_reader :char_pokemon , :indivudal_stats, :effort_values, :stat, :level, :species, :type, :moves, :name
-  attr_accessor :current_move, :current_hp
+  attr_reader :char_pokemon , :indivudal_stats, :species, :type, :moves, :name, :effort_points, :experience_got
+  attr_accessor :current_move, :current_hp, :current_speed, :base_exp, :level, :effort_values, :stat
   # include neccesary modules
 
   # (complete parameters)
@@ -15,7 +15,7 @@ class Pokemon
     # Retrieve pokemon info from Pokedex and set instance variables
     @name = name || specie
     @species = specie.capitalize
-     @level = level || 1
+    @level = level || 1
     @type = @char_pokemon[:type]
     @base_exp = @char_pokemon[:base_exp]
     @effort_points = @char_pokemon[:effort_points]
@@ -26,8 +26,10 @@ class Pokemon
     # Calculate Individual Values and store them in instance variable
     @indivudal_stats = { hp: rand(0..31), attack: rand(0..31), defense: rand(0..31), special_attack: rand(0..31), special_defense: rand(0..31), speed: rand(0..31) }
     # Create instance variable with effort values. All set to 0
-    @effort_values = { hp: 5, attack: 2, defense: 20, special_attack: 50, special_defense: 30, speed: 10 }
+    @effort_values = { hp: 0, attack: 0, defense: 0, special_attack: 0, special_defense: 0, speed: 0 }
+    @current_exp = 0
     @experience_got = 0
+    @exp_tolevelup = 0
     @current_hp = 0
     @current_attack = 0
     @current_defense = 0
@@ -123,11 +125,23 @@ class Pokemon
   
   def increase_stats(target)
     # Increase stats base on the defeated pokemon and print message "#[pokemon name] gained [amount] experience points"
-
+    @exp_tolevelup = (6 / 5.0 * level**3 - 15 * level**2 + 100 * level - 140).floor
     # If the new experience point are enough to level up, do it and print
+    @experience_got = (target.base_exp * level / 7.0).floor
+    @current_exp += @experience_got
     # message "#[pokemon name] reached level [level]!" # -- Re-calculate the stat
-      
-   
+      if @current_exp >= @exp_tolevelup
+        @level += 1
+        calculate_effortValues(target)
+        @stat = {
+          hp: (((2 * @base_stats[:hp]+ @indivudal_stats[:hp] + (@effort_values[:hp]/4.0).floor) * @level / 100 + level + 10).floor),
+          attack: ((((2 * @base_stats[:attack] + @indivudal_stats[:attack] + (@effort_values[:attack]/4.0).floor) * level / 100) + 5).floor),
+          defense:  (((2 * @base_stats[:defense] + @indivudal_stats[:defense] + (@effort_values[:defense]/4.0).floor) * level / 100 + 5).floor),
+          special_attack:  (((2 * @base_stats[:special_attack] + @indivudal_stats[:special_attack] + (@effort_values[:special_attack]/4.0).floor) * level / 100 + 5).floor),
+          special_defense:  (((2 * @base_stats[:special_defense] + @indivudal_stats[:special_defense] + (@effort_values[:special_defense]/4.0).floor) * level / 100 + 5).floor),
+          speed:  (((2 * @base_stats[:speed] + @indivudal_stats[:speed] + (@effort_values[:speed]/4.0).floor) * level / 100 + 5).floor),
+        }
+      end
   end
   
   # private methods: vtarget_defensive_stat
@@ -135,7 +149,7 @@ class Pokemon
   # Create here auxiliary methods
   def offensive_stat(type_attack,enemy_type)
     types_multipler = Pokedex::TYPE_MULTIPLIER
-    multiplier_damage = 0
+    multiplier_damage = 1
     types_multipler.each do |moves| 
       if moves[:user] == type_attack &&  moves[:target] == enemy_type[0]
         multiplier_damage = moves[:multiplier]
@@ -150,7 +164,19 @@ class Pokemon
    else
     enemy.stat[:special_defense]
     end
-
 end
+
+def calculate_effortValues(enemy)
+  effort_po = enemy.effort_points
+  effort_va = self.effort_values
+
+  effort_va.each do |key, value| 
+    if key == effort_po[:type] 
+       value += effort_po[:amount]
+    end
+  end
+  self.effort_values = effort_va
+end
+
 end
 
