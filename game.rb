@@ -1,6 +1,5 @@
 #require neccesary files
 require_relative "player"
-require_relative "get_input"
 # require_relative "battle"
  include GetInput
 
@@ -80,12 +79,18 @@ end
 
     # Then create a Player with that information and store it in @player
 
-  def train
+  def train(playyer1,bot)
     # Complete this
+    #bot = Bot.new
+    battle_bot = Battle.new(playyer1, bot )
+    battle_bot.start
   end
 
-  def challenge_leader
+  def challenge_leader(playyer1,leader)
     # Complete this
+    #leader = Leader.new
+    battle_leader = Battle.new(playyer1, leader )
+    battle_leader.start
   end
 
   def show_stats(jugador,pokemon_name_gotten)
@@ -102,6 +107,8 @@ end
 
   def goodbye
     # Complete this
+    puts "Thanks for playing Pokemon Ruby"
+    puts "This game was created with love by: Elias Mesones, Carlos Mendoza, Camilo Huanca, Jairo Pinedo"
   end
 
   def menu
@@ -109,16 +116,28 @@ end
   end
 
 # Suggested game flow
-
+options = ["fight", "leave"]
 action = print_menu
 until action == "Exit"
   case action
   when "Train"
-    train
-    action = print_menu
+    bot = Bot.new
+    valor = desicion(options,playyer1,bot)
+    if valor.downcase == "fight"
+      train(playyer1,bot)
+      action = print_menu
+    else
+      action = print_menu
+    end
   when "Leader"
-    challenge_leader
-    action = print_menu
+    leader = Leader.new
+    valor1 = desicion(options,playyer1,leader,"fight!")
+    if valor1.downcase == "fight"
+      challenge_leader(playyer1,leader)
+      action = print_menu
+    else
+      action = print_menu
+    end
   when "Stats"
     show_stats(playyer1,pokemon_name_gotten)
     action = print_menu
