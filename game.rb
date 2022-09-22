@@ -26,7 +26,7 @@ class Game
     pokemon_name = get_pokemon_name(name,pokemon)
     # create_player
     playyer1 = Player.new(name,pokemon,pokemon_name)
-    game_flow(playyer1)
+    game_flow(playyer1,pokemon_name)
   end
 
   def train(playyer1,bot)
@@ -41,46 +41,26 @@ class Game
     battle_leader.start
   end
 
-  def show_stats(jugador,pokemon_name)
-    # Complete this
-    p pokemon_name
-   puts ["#{pokemon_name}:",
-    "Kind: #{jugador.pokemon.species}",
-    "Level: #{jugador.pokemon.level}",
-    "Type: #{jugador.pokemon.type}",
-    "Stats:"]
-    jugador.pokemon.stat.each do |stat, value|
-      puts "#{stat}: #{value}"
-    end
-  end
-
-  def goodbye
-    # Complete this
-    ["Thanks for playing Pokemon Ruby",
-    "This game was created with love by: Elias Mesones, Carlos Mendoza, Camilo Huanca, Jairo Pinedo"]
-  end
-
-  def game_flow(playyer1)
-    options = ["fight", "leave"]
-    option_menu = ["Train", "Leader", "Stats","Exit"]
+  def game_flow(playyer1,pokemon_name)
+    options = [["fight", "leave"],["Train", "Leader", "Stats","Exit"]]
     action = ""
     until action == "Exit"
       action = print_menu
       case action
       when "Train"
         bot = Bot.new
-        valor = desicion(options, playyer1, bot)
+        valor = desicion(options[0], playyer1, bot)
         train(playyer1,bot) if valor.downcase == "fight"
       when "Leader"
         leader = Leader.new
-        valor1 = desicion(options,playyer1,leader,"fight!")
+        valor1 = desicion(options[0],playyer1,leader,"fight!")
         challenge_leader(playyer1,leader) if valor1.downcase == "fight"
       when "Stats"
         show_stats(playyer1,pokemon_name)
       when "Exit"
         puts goodbye
       end
-      puts "Invalid Option" unless option_menu.include?(action)
+      puts "Invalid Option" unless options[1].include?(action)
     end
   end
 end
