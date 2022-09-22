@@ -95,4 +95,15 @@ module GetInput
     print "> "
     gets.chomp.strip.capitalize
   end
+
+  def get_pokemon_name(name,pokemon)
+    puts ["You selected #{pokemon} Great choice!",
+      "Give your pokemon a name?"]
+    print "> "
+    pokemon_name = gets.chomp
+    pokemon_name = pokemon if pokemon_name.empty?
+    puts ["#{name}, raise your young #{pokemon_name} by making it fight!",
+    "When you feel ready you can challenge BROCK, the PEWTER's GYM LEADER"]
+    pokemon_name
+  end
 end
