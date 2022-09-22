@@ -2,19 +2,19 @@
 require_relative "player"
 # require_relative "battle"
  include GetInput
-
+ include MethodsGame
 class Game
-  attr_reader :name, :pokemon ,:pokemon_name
+  attr_accessor :name, :pokemon_name, :pokemon, :playyer1
   def initialize
     @name = ""
     @pokemon = ""
     @pokemon_name = ""
-    
+    @playyer1 = ""
   end
   def start
     #Create a welcome method(s) to get the name, pokemon and pokemon_name from the user
     puts welcome
-    @name = get_input("First, what is your name?")
+    name = get_input("First, what is your name?")
     puts welcome_with_data(name)
     # puts "1. Charmander        2. Bulbasaur      3. Squirtle"
     starters = Pokedex::POKEMONS.select { |_name, data| data[:starter] == true }
@@ -22,40 +22,19 @@ class Game
     #valid_starter.each.with_index Do |pokemon, index|
     # print "#{index + 1}. #{pokemon}  "
     #end
-    @pokemon = get_with_options2("Choose a starting pokemon",valid_starter)
+    pokemon = get_with_options2("Choose a starting pokemon",valid_starter)
     puts "You selected #{pokemon} Great choice!
     Give your pokemon a name?"
-@pokemon_name = ""
-@pokemon_name = gets.chomp
-if @pokemon_name.empty?
-@pokemon_name = pokemon 
-end 
-puts "#{name}, raise your young #{pokemon_name} by making it fight!
-When you feel ready you can challenge BROCK, the PEWTER's GYM LEADER"
-  end 
-end
-
-game = Game.new
-game.start
-
-name_gotten = game.name
-pokemon_gotten = game.pokemon
-pokemon_name_gotten = game.pokemon_name
- playyer1 = Player.new(name_gotten,pokemon_gotten,pokemon_name_gotten)
-
-
-#playyer1.pokemon.stat
-def print_menu
-  puts "\n" + "-" * 30 + "Menu" + "-" * 30
-  puts "1. Stats           2. Train          3. Leader"+"          4. Exit"
-  puts "\n"
-
-  print "> "
-  gets.chomp.strip
-end
-
-
-    # Then create a Player with that information and store it in @player
+    pokemon_name = gets.chomp
+    pokemon_name = pokemon  if @pokemon_name.empty?
+    puts "#{name}, raise your young #{pokemon_name} by making it fight!
+    When you feel ready you can challenge BROCK, the PEWTER's GYM LEADER"
+    
+    playyer1 = Player.new(name,pokemon,pokemon_name)
+    # create_player
+    game_flow(playyer1)
+    goodbye
+  end
 
   def train(playyer1,bot)
     # Complete this
@@ -73,53 +52,55 @@ end
 
   def show_stats(jugador,pokemon_name_gotten)
     # Complete this
-   puts "#{pokemon_name_gotten}:"
-   puts "Kind: #{jugador.pokemon.species}"
-   puts "Level: #{jugador.pokemon.level}"
-   puts "Type: #{jugador.pokemon.type}"
-   puts "Stats:"
-     jugador.pokemon.stat.each do |stat, value|
+   puts ["#{pokemon_name_gotten}:",
+    "Kind: #{jugador.pokemon.species}",
+    "Level: #{jugador.pokemon.level}",
+    "Type: #{jugador.pokemon.type}",
+    "Stats:"]
+    jugador.pokemon.stat.each do |stat, value|
       puts "#{stat}: #{value}"
-      end
+    end
   end
 
   def goodbye
     # Complete this
-    puts "Thanks for playing Pokemon Ruby"
-    puts "This game was created with love by: Elias Mesones, Carlos Mendoza, Camilo Huanca, Jairo Pinedo"
+    ["Thanks for playing Pokemon Ruby",
+    "This game was created with love by: Elias Mesones, Carlos Mendoza, Camilo Huanca, Jairo Pinedo"]
   end
 
-  def menu
-    # Complete this
-  end
-
-# Suggested game flow
-options = ["fight", "leave"]
-action = print_menu
-until action == "Exit"
-  case action
-  when "Train"
-    bot = Bot.new
-    valor = desicion(options,playyer1,bot)
-    if valor.downcase == "fight"
-      train(playyer1,bot)
+  def game_flow(playyer1)
+    options = ["fight", "leave"]
+    option_menu = ["Train", "Leader", "Stats"]
+    action = ""
+    until action == "Exit"
       action = print_menu
-    else
+      case action
+      when "Train"
+      bot = Bot.new
+      valor = desicion(options, playyer1, bot)
+      if valor.downcase == "fight"
+        train(playyer1,bot)
+        action = print_menu
+      else
+        action = print_menu
+      end
+      when "Leader"
+      leader = Leader.new
+      valor1 = desicion(options,playyer1,leader,"fight!")
+      if valor1.downcase == "fight"
+        challenge_leader(playyer1,leader)
+        action = print_menu
+      else
+        action = print_menu
+      end
+      when "Stats"
+      show_stats(playyer1,pokemon_name_gotten)
       action = print_menu
+      end
+      puts "Invalid Option" unless option_menu.include?(action)
     end
-  when "Leader"
-    leader = Leader.new
-    valor1 = desicion(options,playyer1,leader,"fight!")
-    if valor1.downcase == "fight"
-      challenge_leader(playyer1,leader)
-      action = print_menu
-    else
-      action = print_menu
-    end
-  when "Stats"
-    show_stats(playyer1,pokemon_name_gotten)
-    action = print_menu
   end
 end
 
-goodbye
+game = Game.new
+game.start
