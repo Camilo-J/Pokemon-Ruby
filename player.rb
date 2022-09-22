@@ -1,9 +1,10 @@
 # require neccesary files
-require_relative "get_input"
 require_relative "battle"
+
 class Player
   include GetInput
   attr_reader :pokemon , :name
+  
   # (Complete parameters)
 
   def initialize(name, pokemon_species, name_pokemon, level_pokemon = nil)
