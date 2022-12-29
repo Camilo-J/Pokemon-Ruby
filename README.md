@@ -1,4 +1,4 @@
-#Pokemon Ruby
+# Pokemon-ruby
 
 This project consists to build a very close recreation of the classic Pokemon
 game. You will be able to select one pokemon at the beginning of the game. Then
