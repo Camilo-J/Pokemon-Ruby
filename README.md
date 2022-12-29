@@ -43,7 +43,7 @@ Here, GREAT MASTER! There are 3 POKEMON here! Haha!
 When I was young, I was a serious POKEMON trainer.
 In my old age, I have only 3 left, but you can have one! Choose!
 
-1. Bulbasaur    2. Charmander   3. Squirtle     
+1. Bulbasaur    2. Charmander   3. Squirtle
 >
 ```
 
@@ -70,7 +70,7 @@ GREAT MASTER, raise your young GREAT CHAR by making it fight!
 When you feel ready you can challenge BROCK, the PEWTER's GYM LEADER
 -----------------------Menu-----------------------
 
-1. Stats        2. Train        3. Leader       4. Exit         
+1. Stats        2. Train        3. Leader       4. Exit
 >
 ```
 
@@ -93,7 +93,7 @@ Speed: 6
 Experience Points: 0
 -----------------------Menu-----------------------
 
-1. Stats        2. Train        3. Leader       4. Exit         
+1. Stats        2. Train        3. Leader       4. Exit
 >
 ```
 
@@ -108,7 +108,7 @@ Great master challenge Random Person for training
 Random Person has a Onix level 4
 What do you want to do now?
 
-1. Fight        2. Leave        
+1. Fight        2. Leave
 >
 ```
 
@@ -130,7 +130,7 @@ HP: 17
 
 Great master, select your move:
 
-1. scratch      2. ember        
+1. scratch      2. ember
 >
 ```
 
@@ -166,7 +166,7 @@ HP: 16
 
 Great master, select your move:
 
-1. scratch      2. ember        
+1. scratch      2. ember
 >
 ```
 
@@ -190,7 +190,7 @@ Onix WINS!
 -------------------Battle Ended!-------------------
 -----------------------Menu-----------------------
 
-1. Stats        2. Train        3. Leader       4. Exit         
+1. Stats        2. Train        3. Leader       4. Exit
 >
 ```
 
@@ -204,7 +204,7 @@ Great master challenge Random Person for training
 Random Person has a Bulbasaur level 2
 What do you want to do now?
 
-1. Fight        2. Leave        
+1. Fight        2. Leave
 > fight
 
 Random Person sent out BULBASAUR!
@@ -218,8 +218,8 @@ HP: 13
 
 Great master, select your move:
 
-1. scratch      2. ember        
-> ember  
+1. scratch      2. ember
+> ember
 
 --------------------------------------------------
 Great Char used EMBER!
@@ -237,7 +237,7 @@ HP: 7
 
 Great master, select your move:
 
-1. scratch      2. ember        
+1. scratch      2. ember
 > ember
 
 --------------------------------------------------
@@ -255,7 +255,7 @@ HP: 1
 
 Great master, select your move:
 
-1. scratch      2. ember        
+1. scratch      2. ember
 > scratch
 
 --------------------------------------------------
@@ -273,7 +273,7 @@ Great Char gained 18 experience points
 -------------------Battle Ended!-------------------
 -----------------------Menu-----------------------
 
-1. Stats        2. Train        3. Leader       4. Exit         
+1. Stats        2. Train        3. Leader       4. Exit
 >
 ```
 
@@ -296,7 +296,7 @@ Speed: 6
 Experience Points: 18
 -----------------------Menu-----------------------
 
-1. Stats        2. Train        3. Leader       4. Exit         
+1. Stats        2. Train        3. Leader       4. Exit
 >
 ```
 
@@ -321,7 +321,7 @@ Great Char reached level 5!
 -------------------Battle Ended!-------------------
 -----------------------Menu-----------------------
 
-1. Stats        2. Train        3. Leader       4. Exit         
+1. Stats        2. Train        3. Leader       4. Exit
 >
 ```
 
@@ -336,7 +336,7 @@ Great master challenge the Gym Leader Brock for a fight!
 Brock has a Onix level 10
 What do you want to do now?
 
-1. Fight        2. Leave        
+1. Fight        2. Leave
 > Fight
 
 Brock sent out ONIX!
@@ -350,7 +350,7 @@ HP: 29
 
 Great master, select your move:
 
-1. scratch      2. ember        
+1. scratch      2. ember
 > ember
 
 --------------------------------------------------
@@ -368,7 +368,7 @@ HP: 24
 
 Great master, select your move:
 
-1. scratch      2. ember        
+1. scratch      2. ember
 > ember
 
 --------------------------------------------------
@@ -386,7 +386,7 @@ HP: 19
 
 Great master, select your move:
 
-1. scratch      2. ember        
+1. scratch      2. ember
 > scratch
 
 --------------------------------------------------
@@ -405,7 +405,7 @@ HP: 13
 
 Great master, select your move:
 
-1. scratch      2. ember        
+1. scratch      2. ember
 > ember
 
 --------------------------------------------------
@@ -423,7 +423,7 @@ HP: 8
 
 Great master, select your move:
 
-1. scratch      2. ember        
+1. scratch      2. ember
 > ember
 
 --------------------------------------------------
@@ -443,7 +443,7 @@ HP: 1
 
 Great master, select your move:
 
-1. scratch      2. ember        
+1. scratch      2. ember
 > scratch
 
 --------------------------------------------------
@@ -460,7 +460,7 @@ Congratulation! You have won the game!
 You can continue training your Pokemon if you want
 -----------------------Menu-----------------------
 
-1. Stats        2. Train        3. Leader       4. Exit         
+1. Stats        2. Train        3. Leader       4. Exit
 >
 ```
 
@@ -582,7 +582,7 @@ opponent pokemon. The formula is:
 
 If you win a battle vs a Charmander level 5 your pokemon will gain:
 
-`(62 * 5 / 7.0).floor = 44` You would gain 44 experience points. 
+`(62 * 5 / 7.0).floor = 44` You would gain 44 experience points.
 
 ## Effort Values and Effort Points
 
@@ -676,7 +676,7 @@ From the Pokedex:
 When initialized:
 
 - **level: 1**
-- **individual values:  {hp: 3, attack: 18, defense: 23, special_attack: 1, special_defense: 15, speed: 10 }**
+- **individual values: {hp: 3, attack: 18, defense: 23, special_attack: 1, special_defense: 15, speed: 10 }**
 - **effort values: {hp: 0, attack: 0, defense: 0, special_attack: 0, special_defense: 0, speed: 0 }**
 - **stats: ??????????**
 
